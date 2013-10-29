@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="/">PolishNews.ru</a>
+		<a class="navbar-brand" href="/">mexico24.ru</a>
 	</div>
 
 	<div class="collapse navbar-collapse">

@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'polishnews',
+			'database'  => 'mexico24',
 			'username'  => 'root',
 			'password'  => 'root',
 			'charset'   => 'utf8',

@@ -78,7 +78,7 @@ class ArticlesController extends \BaseController {
 		if( !Input::has('articleName') ) die('Поле название обязательно для заполнения');
 
 		// Загружаем изображение 
-		$preview = $this->uploadImage('preview', 'userfiles/');
+		$preview = $this->uploadImage('preview', 'uploads/');
 
 		//  Если редактирование, то выбираем элемент
 		if(Input::has('id')) $article = Articles::find( Input::get('id') );
