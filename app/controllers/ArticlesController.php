@@ -131,9 +131,6 @@ class ArticlesController extends \BaseController {
 		// Получаем список подкатегорий
 		$subcategories = Categories::where('parent_id', '=', $article['category_id'])->get()->toArray();
 
-
-		// debug($subcategories); exit;
-
 		$view = View::make('admin.articles.create')
 						->with('article', $article)
 						->with('categories', $categories)
