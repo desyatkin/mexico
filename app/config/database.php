@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'mexico24',
 			'username'  => 'root',
-			'password'  => 'root',
+			'password'  => 'toor',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
