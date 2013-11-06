@@ -5,10 +5,10 @@
         <div class="PinkBlock310_header">Новость недели</div>
         <div class="PinkBlock310_cont">
             <div class="newsOfaWeek">
-                <img src="/files/cache/thumb/23ad7e3041aed76ca7ee7142b74a9ca3.JPEG" alt="">
+                <img src="{{ $newsOfTheWeek['preview'] }}" height="76" width="100" alt="">
                 <h4>
-                    <a href="/news/different/2013/06/18/meksikanskij-sputnik/">
-                    Мексиканский спутник в 2014 году выйдет в открытый космос при помощи российской ракеты</a>
+                    <a href="{{ $newsOfTheWeek['url'] }}">
+                    {{ $newsOfTheWeek['article_name'] }}</a>
                 </h4>
                 <div class="clear"></div>
             </div>
@@ -36,38 +36,13 @@
         <div class="GrayBlock310_header">Последние новости</div>
         <div class="GrayBlock310_cont">
             <ul>
+            @foreach($lastNews as $news)
                 <li>
-                    <a href="/news/different/2013/11/05/minzdrav-meksiki-nach/">Минздрав Мексики начнет мониторинг веса граждан страны</a>
-                    <br>&nbsp;В Мексике началась масштабная кампания по борьбе с ожирением ее граждан.&nbsp;… 
-                    <span class="date"><nobr>2013-11-05</nobr></span>
+                    <a href="{{ $news['url'] }}">{{ $news['article_name'] }}</a>
+                    <br>{{ $news['content'] }}
+                    <span class="date"><nobr>{{ $news['created_at'] }}</nobr></span>
                 </li>
-
-                <li>
-                    <a href="/news/different/2013/11/04/meksikancy-stanovjatsja-vsje-objemnee/">Мексиканцы становятся все объемнее</a>
-                    <br>Министерство охраны здоровья страны серьезно обеспокоено.… 
-                    <span class="date"><nobr>2013-11-04</nobr></span>
-                </li>
-
-                <li>
-                    <a href="/news/crime/2013/11/04/v-koridore-na-granice-obnaruzhyli-327-kg-kokaina/">В коридоре на границе обнаружили 327 кг кокаина</a>
-                    <br>Американская полиция обнаружила туннель с наркотиками.… 
-                    <span class="date"><nobr>2013-11-04</nobr></span>
-                </li>
-
-                <li><a href="/news/politics-economics/2013/11/04/meksika-procshaet-kubu/">Мексика прощает Кубу</a>
-                <br>Страна спишет большую часть многомиллионного долга.… <span class="date"><nobr>2013-11-04</nobr></span></li>
-
-                <li><a href="/news/different/2013/11/04/na-meksiku-opjat-nadvigaetsja-shtorm/">На Мексику опять надвигается шторм</a>
-                <br>Тропический шторм под именем "Соня" вот-вот обрушится на страну.… <span class="date"><nobr>2013-11-04</nobr></span></li>
-
-                <li><a href="/news/crime/2013/11/04/hellouin-ne-ostalsja-ne-zamechennym/">Хэллоуин не остался не замеченным</a>
-                <br>В Мексике грабители удачно воспользовались праздником.… <span class="date"><nobr>2013-11-04</nobr></span></li>
-
-                <li><a href="/news/2013/11/03/nigde-dverej-deshevle/">Нигде дверей дешевле нет, чем здесь</a>
-                <br>Далеко не каждый человек может позволить себе просто закупить самые дорогие материалы от хороших… <span class="date"><nobr>2013-11-03</nobr></span></li>
-
-                <li><a href="/news/different/2013/11/01/senat-meksiki-borets/">Сенат Мексики борется с нездоровой пищей</a>
-                <br>&nbsp;В Мексике на нездоровую пищу будет введен 8%-й налог.&nbsp;… <span class="date"><nobr>2013-11-01</nobr></span></li>
+            @endforeach
             </ul>
         </div>
         <div class="GrayBlock310_bottom"></div>
@@ -80,8 +55,8 @@
         <div class="PinkBlock310_header">Интересные статьи</div>
         <div class="PinkBlock310_cont">
             <div class="newsOfaWeek">
-                <img src="/files/cache/thumb/8645caf06573d96df404ab1f3222ceda.jpg" alt="">
-                <h4><a href="/articles/turistu/pljazhi-meksiki/">Пляжи Мексики: все для требовательных туристов</a></h4>
+                <img src="{{ $interestingArticle['preview'] }}" height="76" width="100" alt="">
+                <h4><a href="{{ $interestingArticle['url'] }}">{{ $interestingArticle['article_name'] }}</a></h4>
                 <div class="clear"></div>
             </div>
         </div>

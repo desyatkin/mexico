@@ -4,25 +4,24 @@
 |-------------------------------------------------------------------------------
 | Контроллер управлющий выводом контента на сайт
 |-------------------------------------------------------------------------------
-| NB: Хочется следуя принципу DRY разметать эти три здоровых функции, 
-| минимум на 8 маленьких.
-| Но для таких манипуляций сейчас пожалуй позновато.
-| 
-| Необходимый функционал воспроизведен полностью (по крайней мере я так думаю)
+| Необходимый функционал воспроизведен полностью.
 |
 | Не сделано: 
 |   404-я ошибка (там сейчас заглушка)
-|   Отсутствуют комментарии к некотороым функциям
+|
+| Примечание: 
+|   Элементы выделенные комментариями: "// *!*!*!*!*!" нуждаются 
+|   в более конкретном или подробном описании
 |-------------------------------------------------------------------------------
 |
 | Фуннкции:
 |   основные (отвечают за вывод контента):
 |   getShowIndex()                                  - формирует главную страницу
 |   getShowCategory($category, $subcategory)        - формирует страницу категории
-|   getShowArticle($category, $subcategory, $alias) - формирует страницу статьи
-|
-|   вспомогательные (повторяющиеся операции, вывод ошибок, etc...):
-|   getVideoNews($limit)                            - последние статьи в категории "Видео Новости"
+|   getShowArticle($category, $subcategory, $year, $month, $day, $alias) - формирует страницу статьи
+|     (Примечание: переменные $year $month $day - дата создания статьи)
+|   
+| вспомогательные (повторяющиеся операции, вывод ошибок, etc...):
 |
 |   blockArticles($limit, $order)                   - несколько случайных или последних статей 
 |                                                     (безотносительно категории)
@@ -32,35 +31,51 @@
 |   error404() - ошибка 404 NotFound
 |
 | ВАЖНО!!! Все переменные передающиеся во view являются обязательными! 
-| Удалите что-то и удачного вам дебагинга...
 | Прежде чем удалять их от сюда необходимо убрать их в соответствующем шаблоне 
 | в папке /app/views/
-| 
+|
+|-------------------------------------------------------------------------------
+| Шаблоны с указанием переменных которые необходимо передать
 | site.index:
-|   randomArticles          - 4 случайных статьи для блока в шапке
-|   videoNews               - 2 случайных статьи для блока "Видео Новости"
-|   previewBlocks           - Массив с блоками статей для анонсов по категориям
+|   newsOfTheWeek       - 1 случайная статья для блока "Новость недели" (сайдбар)
+|   lastNews            - массив последних статей для блока "Последние новости" (сайдбар)
+|  (примечание: количество статей варьируется в зависимости от шаблона и может быть любым)
+|   interestingArticle  - 1 случайная статья для блока "Интересные статьи" (сайдбар)
+|   randomArticles      - 4 случайных статьи для блока-слайдера в верхней части сайта
+|   previewBlocks       - массив с блоками статей для анонсов по категориям
+|  (примечание: этот блок содержит только статьи из подкадегорий категории "Новости")
 |
 | site.category
-|   url                     - ссылка на категориию 
-|                             (идет как префикс к ссылкам на статьи)
-|   randomArticles          - 4 случайных статьи для блока в шапке
-|   saidebarPreviewBlock    - 1 случайная статья для блока в сайдбаре
-|   saidebarVideoNews       - 2 последних статьи для блока "ВидеоНовости" в сайдбаре
-|   lastNews                - 4 последних статьи (для блока в сайдбаре)
-|   categoryName            - имя категории
-|   articles                - массив статей
-|   pagination              - данные для пагинации
+|   newsOfTheWeek       - 1 случайная статья для блока "Новость недели" (сайдбар)
+|   interestingArticle  - 1 случайная статья для блока "Интересные статьи" (сайдбар)
+|   lastNews            - массив последних статей для блока "Последние новости" (сайдбар)
+|  (примечание: количество статей варьируется в зависимости от шаблона и может быть любым)
+|   newsInCtaegory      - массив случайных статей из данной категории для блока "Новости по теме"
+|   articles            - массив статей
+|   pagination          - данные для формирования ссылок пагинации
+|   categoryName        - имя категории
+|   url                 - ссылка на категориию 
+|                        (идет как префикс к ссылкам на статьи)
 |
 | site.article
-|   randomArticles          - 4 случайных статьи для блока в шапке
-|   categoryName            - имя категории
-|   url                     - ссылка на категориию 
-|   saidebarPreviewBlock    - 1 случайная статья для блока в сайдбаре
-|   saidebarVideoNews       - 2 последних статьи для блока "ВидеоНовости" в сайдбаре
-|   lastNews                - 4 последних статьи (для блока в сайдбаре)
-|   article                 - массив со статьей
-|   newsInCtaegory          - 3 последних новости в категории
+|   newsOfTheWeek       - 1 случайная статья для блока "Новость недели" (сайдбар)
+|   interestingArticle  - 1 случайная статья для блока "Интересные статьи" (сайдбар)
+|   categoryName        - имя категории
+|   url                 - ссылка на категориию 
+|   lastNews            - массив последних статей для блока "Последние новости" (сайдбар)
+|  (примечание: количество статей варьируется в зависимости от шаблона и может быть любым)
+|   article             - массив со статьей
+|   newsInCtaegory      - массив случайных статей из данной категории для блока "Новости по теме"
+|
+| Дополнительная информация:
+|  Баннеры:
+|   banners.banner_left     - баннер в левом сайдбаре
+|   banners.banner_top      - баннер в шапке под меню
+|  Хелперы:
+|   helpers.do_you_know     - статичный html код, блок "Знаете ли вы, что?" в сайдбаре
+|   helpers.mainNewsSlider  - собирает блок-слайдер для главной страницы
+|   helpers.sape            - выводит ссылки сапы
+|   helpers.sotmarket       - выводит баннер сотмаркета
 |-------------------------------------------------------------------------------
 */
 class SiteController extends \BaseController {
@@ -78,22 +93,24 @@ class SiteController extends \BaseController {
     | дополнительные функции:
     |   blockArticles($limit)  - возвращает массив случайных статей 
     |                            для блока анонсов в шапке
-    |   getVideoNews($limit)   - возвращает массив последних статей
-    |                            в категории "Видео Новости"
     | переменные:
-    |   $articles         - массив случайных статей
-    |   $previewVideoNews - массив статей для блока анонсов категории "ВидеоНовости"
-    |   $otherCategories  - массив подкатегорий (все категории кроме корневых)
+    |   $saidbarArticles  - массив случайных статей для блоков "Новость недели" и "Интересные статьи"
+    |   $randomArticles   - массив случайных статей для блока-слайдера в верхней части страницы
+    |   $lastNews         - массив последних статей на сайте
+    |   $otherCategories  - массив подкатегорий категории news
     |   $previewBlocks    - массив данных для блоков анонсов по категориям
     |-------------------------------------------------------------------------------
     */
     public function getShowIndex() {
 
         // Получаем 2 случайных статьи для блоков в сайдбаре
-        $articles = $this->blockArticles(2);
+        $saidbarArticles = $this->blockArticles(2);
+
+        // Получаем 4 случайных статьи для блока-слайдера в верхней части главной страницы
+        $randomArticles = $this->blockArticles(4);
 
         // Получаем массив всех подкатегорий категории news
-        $otherCategories = Categories::select('id', 'alias')
+        $otherCategories = Categories::select('id', 'alias', 'category_name')
                                      ->where('parent_id', '=', 1)
                                      ->get()
                                      ->toArray();
@@ -113,17 +130,22 @@ class SiteController extends \BaseController {
                                        ->toArray();
 
             $previewBlocks[$i]['category_alias'] = $category['alias'];
+            $previewBlocks[$i]['category_name']  = $category['category_name'];
             $previewBlocks[$i]['articles']       = $previewArticles;
             $i++;
         }
-        echo '<pre>';
-        var_dump($articles, $previewBlocks);
-        die();
+        
+        // берем 8 последних статей на сайте для блока в сайдбаре
+        $lastNews = $this->blockArticles(8, 'id DESC');
+
 
         // отправляем все переменные во view
-        $view = View::make('site.index');
-                    //->with('randomArticles', $articles)
-                    //->with('previewBlocks', $previewBlocks);
+        $view = View::make('site.index')
+                    ->with('newsOfTheWeek', array_shift($saidbarArticles))
+                    ->with('lastNews', $lastNews)
+                    ->with('interestingArticle', array_shift($saidbarArticles))
+                    ->with('randomArticles', $randomArticles)
+                    ->with('previewBlocks', $previewBlocks);
 
         // Возвращаем сформированную страницу
         return $view;
@@ -141,8 +163,6 @@ class SiteController extends \BaseController {
     | дополнительные функции:
     |   blockArticles($limit) - возвращает массив случайных статей 
     |                           для блока анонсов в шапке
-    |   getVideoNews($limit)  - возвращает массив последних статей
-    |                           в категории "Видео Новости"
     |   error404()            - выдает ошибку 404 not found
     |
     | переменные:
@@ -153,9 +173,9 @@ class SiteController extends \BaseController {
     |                            только блок статей
     |   $pagination            - часть массива articlesAndPagination содержащая
     |                            только данные для пагинации
-    |   $topBlockArticles      - случайные статьи для блока в шапке
-    |   $saidebarPreviewBlock  - случайная статья для блока в сайдбаре
-    |   $previewVideoNews      - последние статьи из категории "Видео Новости"
+    |   $saidbarArticles       - массив случайных статей для блоков "Новость недели" и "Интересные статьи"
+    |   $lastNews              - массив последних статей на сайте
+    |   $newsInCtaegory        - массив случайных статей из данной категории
     |-------------------------------------------------------------------------------
     */
     public function getShowCategory($category, $subcategory = false) {
@@ -170,7 +190,8 @@ class SiteController extends \BaseController {
         if (empty($categoryArray)) 
             $this->error404();
         
-        $categoryName = $categoryArray[0]['category_name'];
+        $categoryId     = $categoryArray[0]['id'];
+        $categoryName   = $categoryArray[0]['category_name'];
 
         // если указана подкатегория (subcategory != false)
         if ($subcategory) {
@@ -182,10 +203,9 @@ class SiteController extends \BaseController {
                                           ->get()
                                           ->toArray();
             
-            // если такой категории не существует, считаем что в $subcategory 
-            // псевдоним статьи из корневой категории и вызываем метод getShowArticle
+            // если такой категории не существует -> 404
             if (empty($subcategoryArray)) {
-                return $this->getShowArticle($category, false, $subcategory);
+                $this->error404();
             }
             
             // если категория существует переменной subcategoryId присваивается значение id подкатегории
@@ -202,7 +222,7 @@ class SiteController extends \BaseController {
         $articlesAndPagination = Articles::where('category_id', '=', $categoryArray[0]['id'])
                                          ->where('subcategory_id', '=', $subcategoryId)
                                          ->orderBy('id', 'DESC')
-                                         ->paginate(15)
+                                         ->paginate(12)
                                          ->toArray();
 
         // если статей нет -> 404
@@ -215,14 +235,13 @@ class SiteController extends \BaseController {
         $articles               = array_pop($articlesAndPagination);
         $pagination             = $articlesAndPagination;
 
-        // берем 4 случайных статьи для блока в шапке
-        $topBlockArticles       = $this->blockArticles(4);
-        // берем 1 случайную статью для блока в сайдбаре
-        $saidebarPreviewBlock   = $this->blockArticles(1);
-        // берем 2 последних статьи для блока анонсов категории "ВидеоНовости" в сайдбаре
-        $previewVideoNews       = $this->getVideoNews(2);
-        // берем 4 последних статьи(безотносительно категории) для блока в сайдбаре
-        $lastNews               = $this->blockArticles(4, 'id DESC');
+        // Получаем 2 случайных статьи для блоков в сайдбаре
+        $saidbarArticles        = $this->blockArticles(2);
+        // берем 5 последних статьи(безотносительно категории) для блока в сайдбаре
+        $lastNews               = $this->blockArticles(5, 'id DESC');
+        // берем 4 случайных статьи из текущей катигории
+        $newsInCtaegory         = $this->articleFromCategory($categoryId, $subcategoryId, 4);
+
 
         // собираем link который будет префиксом для всех ссылок на статьи в данной категории
         $url = '/' . $category . '/';
@@ -230,14 +249,14 @@ class SiteController extends \BaseController {
 
         // отправляем все переменные во view
         $view = View::make('site.category')
-                    ->with('url'                    , $url)
-                    ->with('randomArticles'         , $topBlockArticles)
-                    ->with('saidebarPreviewBlock'   , $saidebarPreviewBlock)
-                    ->with('saidebarVideoNews'      , $previewVideoNews)
+                    ->with('newsOfTheWeek'          , array_shift($saidbarArticles))
+                    ->with('interestingArticle'     , array_shift($saidbarArticles))
                     ->with('lastNews'               , $lastNews)
-                    ->with('categoryName'           , $categoryName)
+                    ->with('newsInCtaegory'         , $newsInCtaegory)
                     ->with('articles'               , $articles)
-                    ->with('pagination'             , $pagination);
+                    ->with('pagination'             , $pagination)
+                    ->with('categoryName'           , $categoryName)
+                    ->with('url'                    , $url);
 
         // возвращаем сформированную страницу
         return $view;
@@ -252,19 +271,20 @@ class SiteController extends \BaseController {
     |   $category           - псевдоним категории
     |   $subcategory        - псевдоним подкатегории
     |   $alias              - псевдоним статьи
+    |   $year, $month, $day - переменные представляющие дату создания статьи, участвуют в формировании
+    |                         ссылки на статью.
+    |
     | возвращает:
     |   $view               - сформированная страница
     | дополнительные функции: 
     |   blockArticles($limit) - возвращает массив случайных статей 
     |                           для блока анонсов в шапке
-    |   getVideoNews($limit)  - возвращает массив последних статей
-    |                           в категории "Видео Новости"
     |   error404()            - выдает ошибку 404 not found
     |   articleFromCategory   - берет несколько произвольных статей
     |                           из заданной категории
     |-------------------------------------------------------------------------------
     */
-    public function getShowArticle($category, $subcategory, $alias) {
+    public function getShowArticle($category, $subcategory, $year = 0, $month = 0, $day = 0, $alias) {
         // ишем в базе корневую категорию по её псевдониму (alias)
         $categoryArray = Categories::select('id', 'category_name')
                                    ->where('alias', '=', $category)
@@ -307,6 +327,7 @@ class SiteController extends \BaseController {
                            ->where('category_id', '=', $categoryId)
                            ->where('subcategory_id', '=', $subcategoryId)
                            ->orderBy('id', 'DESC')
+                           ->limit(1)
                            ->get()
                            ->toArray();
 
@@ -314,16 +335,23 @@ class SiteController extends \BaseController {
         if (empty($article)) 
             $this->error404();
 
-        // берем 4 случайных статьи для блока в шапке
-        $topBlockArticles       = $this->blockArticles(4);
-        // берем 1 случайную статью для блока в сайдбаре
-        $saidebarPreviewBlock   = $this->blockArticles(1);
-        // берем 2 последних статьи для блока анонсов категории "ВидеоНовости" в сайдбаре
-        $previewVideoNews       = $this->getVideoNews(2);
-        // берем 4 последних статьи(безотносительно категории) для блока в сайдбаре
-        $lastNews               = $this->blockArticles(4, 'id DESC');
-        // берем 3 случайных статьи из текущей катигории
-        $newsInCtaegory         = $this->articleFromCategory($categoryId, $subcategoryId, 3);
+        
+        // проверка даты
+        // данные из ссылки на страницу должны совпадать с датой создания этой страницы
+        // если не совпадают -> 404
+        $date = $year . '-' . $month . '-' . $day;
+        if (strval($article[0]['created_at']) != strval($date))
+            $this->error404();
+
+        // берем 2 случайных статьи для блоков в сайдбаре
+        $saidbarArticles        = $this->blockArticles(2);
+        // берем 5 последних статьи(безотносительно категории) для блока в сайдбаре
+        $lastNews               = $this->blockArticles(5, 'id DESC');
+        // берем 5 случайных статьи из текущей катигории
+        $newsInCtaegory         = $this->articleFromCategory($categoryId, $subcategoryId, 5);
+
+
+
 
         // собираем ссылку на категорию в которой находится статья
         $url = '/' . $category . '/';
@@ -331,11 +359,10 @@ class SiteController extends \BaseController {
 
         // отправляем все переменные во view
         $view = View::make('site.article')
-                    ->with('randomArticles'         , $topBlockArticles)
+                    ->with('newsOfTheWeek'          , array_shift($saidbarArticles))
+                    ->with('interestingArticle'     , array_shift($saidbarArticles))
                     ->with('categoryName'           , $categoryName)
                     ->with('url'                    , $url)
-                    ->with('saidebarPreviewBlock'   , $saidebarPreviewBlock)
-                    ->with('saidebarVideoNews'      , $previewVideoNews)
                     ->with('lastNews'               , $lastNews)
                     ->with('article'                , $article)
                     ->with('newsInCtaegory'         , $newsInCtaegory);
@@ -366,10 +393,10 @@ class SiteController extends \BaseController {
                             ->toArray();
         return $articles;
     }
-
+    
     /*
     |-------------------------------------------------------------------------------
-    | Ошибка 404 not found (не закончена... Даже не начата. Всего лишь заглушка)
+    | Ошибка 404 not found
     |-------------------------------------------------------------------------------
     */
     public function error404(){
@@ -407,6 +434,11 @@ class SiteController extends \BaseController {
             $subcategory_alias = Categories::select('alias')->find($element['subcategory_id']);
             if (!is_null($subcategory_alias)) $url .= implode($subcategory_alias->toArray()) . '/';
             
+            // *!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!
+            // ссылка на конкретную страницу должна содержать в себе дату её создания
+            $url .= str_replace('-', '/', $element['created_at']) . '/';
+            // *!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!
+
             // Добавляем к ссылке alias статьи          
             $url .= $element['alias'];
 
@@ -446,42 +478,4 @@ class SiteController extends \BaseController {
 
         return $articles;
     }
-}
-
-/*
-class SiteController extends \BaseController {
-
-	//------------------------------------------------------------------------------
-	// Показывает главную страницу сайта
-	//------------------------------------------------------------------------------
-	public function getShowIndex() {
-
-		$view = View::make('site.index');
-
-		return $view;
-	}
-
-
-	//------------------------------------------------------------------------------
-	// Показывает подкатегорию
-	//------------------------------------------------------------------------------
-	public function getShowCategory($category) {
-		return 'category';
-	}
-
-
-	//------------------------------------------------------------------------------
-	// Показывает покатегорию
-	//------------------------------------------------------------------------------
-	public function getShowSubcategory($category, $subcategory) {
-		return 'subcategory';
-	}
-
-
-	//------------------------------------------------------------------------------
-	// Показывает статью
-	//------------------------------------------------------------------------------
-	public function getShowArticle($category, $subcategory, $alias) {
-		return 'article';
-	}
 }

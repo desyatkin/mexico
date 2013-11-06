@@ -28,6 +28,15 @@ margin: 20px 0px 10px;
 font-weight: normal;
 }
 
+hr {
+background: #ccc;
+border: 0px;
+color: #ccc;
+height: 1px;
+margin: 15px 0px;
+padding: 0px;
+}
+
 /* "необтекаемый"  div */
 .clear{
     clear:both;
@@ -295,6 +304,11 @@ ul#vUdobnomFormate li#yandex {
     margin-right: 0px !important;
 }
 
+.left p{
+    padding: 0;
+    margin: 0;
+}
+
 .news {
     padding-bottom: 7px;
     border-bottom: 1px dotted #7c817b;
@@ -370,6 +384,99 @@ a.news_rss {
     border: 1px solid #a9a9a9;
 }
 
+.catBlocks .left {
+    padding-right: 20px;
+    border-right: 1px solid #e8e8e8;
+}
+
+.catBlocks .news {
+    width: 284px;
+    margin: 5px 0 10px 0;
+    padding-bottom: 0px !important;
+    border-bottom: 0;
+    height: 195px;
+}
+
+
+.news .date, .NewsInfoBlock .date {
+    font: 11px Tahoma, Geneva, sans-serif;
+    color: #7c817b;
+    padding: 0px 5px 0px 0px;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.news .rubr a, .NewsInfoBlock .rubr a {
+    font: 11px Tahoma, Geneva, sans-serif;
+    color: #7c817b;
+    padding: 0px 5px;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.news .info{
+    margin-top: 25px
+}
+
+.catBlocks hr {
+    border-bottom: 1px dotted #e8e8e8;
+    clear: both;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.catBlocks .news {
+    border-bottom: 2px dotted #e8e8e8;
+}
+
+.left hr.onFoot {
+    position: relative;
+    top: 20px;
+    /*left: 0;
+    bottom: 0;*/
+    border-bottom: 1px dotted #e8e8e8;
+    display: block;
+    height: 1px;
+    width: 283px;
+}
+
+.otherNews .date {
+    color: #a6a5a5;
+    font-size: 11px;
+}
+
+.otherNews .date {
+    float: left;
+    width: 50px;
+    color: #a6a5a5;
+    font-size: 11px;
+    margin: 7px 10px 5px 0px;
+}
+
+.otherNews .text {
+    float: left;
+    width: 540px;
+    float: left;
+    margin: 5px 0 5px 10px;
+    line-height: 16px;
+}
+
+.NewsInfoBlock {
+    border: 1px solid #e4e4e4;
+    margin: 10px 0;
+    padding: 7px 11px;
+}
+
+.newsBl .Img {
+    float: left;
+    margin: 2px 15px 7px 0;
+    background: #ffdba7;
+}
+
+.Img .Title {
+    font-size: 11px;
+    margin: 0px 10px;
+}
 
 /* подвал */
 .footer {
@@ -1031,30 +1138,30 @@ a.news_rss {
 .b-sotmarket-banner .space_none {
     padding: 0;
     margin: 0;
-    }
+}
 
 
 
 .b-sotmarket-banner {
-    width: 310px; /* Р·РґРµСЃСЊ Р·Р°РґР°РµС‚СЃСЏ С€РёСЂРёРЅР° Р±Р°РЅРЅРµСЂР°*/
+    width: 310px; 
     position: relative; 
     font: 13px/16px Arial, sans-serif;
-    }
+}
 
 
 .b-sotmarket-banner-head {
     height: 32px; 
-    background: url('http://mexico24.ru/files/images/site/main/sotmarket/b-logo.png') 50% 50% no-repeat #000;  /* #000 СЌС‚Рѕ РґРµС„РѕР»С‚РЅС‹Р№ С†РІРµС‚ Р±Р°РЅРЅРµСЂР° */
+    background: url('/images/site/main/sotmarket/b-logo.png') 50% 50% no-repeat #000;  /* #000 СЌС‚Рѕ РґРµС„РѕР»С‚РЅС‹Р№ С†РІРµС‚ Р±Р°РЅРЅРµСЂР° */
     -webkit-border-radius: 7px 7px 0 0;
     -moz-border-radius: 7px 7px 0 0;
     border-radius: 7px 7px 0 0;
-    }
+}
 
 /* MOD: color style */
 
 .b-sotmarket-banner.mod_blue .b-sotmarket-banner-head{
     background-color: #d2def4;
-    }
+}
 
 /* b-sotmarket-banner-content */
 .b-sotmarket-banner-content {
@@ -1064,17 +1171,17 @@ a.news_rss {
     -webkit-border-radius: 0 0 7px 7px;
     -moz-border-radius: 0 0 7px 7px;
     border-radius: 0 0 7px 7px;
-    }
+}
 .b-sotmarket-banner-product {
     overflow: hidden;
     display: block;
-    }
+}
 .b-sotmarket-banner-product-image {
     float: left;
     padding-right: 10px;
     border: none;
     vertical-align: middle;
-    }
+}
 .b-sotmarket-banner-product-text {
     color: #2d5898;
     text-decoration: underline;
@@ -1083,7 +1190,7 @@ a.news_rss {
     cursor: pointer;
     display: table;
     zoom:1;
-    }
+}
 
 
 
@@ -1098,6 +1205,24 @@ a.news_rss {
     background-color: #fff;
     filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
     opacity: 0;
-    }
+}
 
+/* Пагинация */
+.pagination {
+    font-size: 14px;
+    margin: 10px;
+}
 
+.pagination a{
+    text-decoration: none;
+}
+
+.pagination ul li{
+    margin: 0 3px;
+    display: inline;
+}
+
+.pagination .active {
+    font-size: 15px;
+    font-weight: bold;
+}
