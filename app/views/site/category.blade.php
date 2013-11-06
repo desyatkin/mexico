@@ -13,7 +13,7 @@
             
             @foreach ($articles as $key => $article)
                 <div class="news @if(($key%2) == 0 ) left @else right @endif"> 
-                    <img src="{{ $article['preview'] }}" width="100" height="76" alt="">
+                    <img src="/{{ $article['preview'] }}" width="100" height="76" alt="">
                     <h4><a href="{{ $url }}{{ str_replace('-', '/', $article['created_at']) }}/{{ $article['alias'] }}/">
                     {{ $article['article_name'] }}</a></h4>
                     {{ strip_tags(mb_substr($article['content'], 0, 90)) }} ...

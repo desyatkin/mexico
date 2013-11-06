@@ -5,7 +5,7 @@
         <div class="PinkBlock310_header">Новость недели</div>
         <div class="PinkBlock310_cont">
             <div class="newsOfaWeek">
-                <img src="{{ $newsOfTheWeek['preview'] }}" height="76" width="100" alt="">
+                <img src="/{{ $newsOfTheWeek['preview'] }}" height="76" width="100" alt="">
                 <h4>
                     <a href="{{ $newsOfTheWeek['url'] }}">
                     {{ $newsOfTheWeek['article_name'] }}</a>
@@ -55,7 +55,7 @@
         <div class="PinkBlock310_header">Интересные статьи</div>
         <div class="PinkBlock310_cont">
             <div class="newsOfaWeek">
-                <img src="{{ $interestingArticle['preview'] }}" height="76" width="100" alt="">
+                <img src="/{{ $interestingArticle['preview'] }}" height="76" width="100" alt="">
                 <h4><a href="{{ $interestingArticle['url'] }}">{{ $interestingArticle['article_name'] }}</a></h4>
                 <div class="clear"></div>
             </div>

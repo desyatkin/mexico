@@ -79,7 +79,7 @@
         <div class="PeachBlock316_cont">
         @foreach ($newsInCategory['articles'] as $news)
             <div class="news">
-                <img class="news-img-main" src="{{ $news['preview'] }}" height="76" width="100" alt="">
+                <img class="news-img-main" src="/{{ $news['preview'] }}" height="76" width="100" alt="">
                 <h4><a href="/news/{{ $newsInCategory['category_alias'] }}/{{ $news['alias'] }}" title="{{ $news['article_name'] }}">
                     {{ $news['article_name'] }}</a></h4>
                 <span class="newdate">{{ $news['created_at'] }}</span>

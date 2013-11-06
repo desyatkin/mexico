@@ -21,7 +21,7 @@
 
             <div class="newsBl">
                 <div class="Img"> 
-                    <img src="{{ $element['preview'] }}" width="240" height="180" alt="">
+                    <img src="/{{ $element['preview'] }}" width="240" height="180" alt="">
                     <p class="Title">{{ $element['article_name'] }}</p>
                 </div>
 
