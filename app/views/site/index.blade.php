@@ -47,24 +47,19 @@
 
         </div>
 
-{{-- 
 <div class="GrayBlock240 mr0">
 <div class="GrayBlock240_top"></div>
 <div class="GrayBlock240_header">Погода</div>
 <div class="GrayBlock240_cont pb5">
-            
-<span id="gradus">+16°C</span>
-<div id="weather">
-<img id="weather1" alt="" src="/images/site/main/sunly.png">
-<img id="weather2" alt="" src="/images/site/main/none.png">
-</div>
+
+    @include('helpers.weather_parse')            
+
 <span id="city">Мехико</span>
 <div class="clear"></div>
             
 </div>      
 <div class="GrayBlock240_bottom"></div>
 </div>
---}}
   
             
             

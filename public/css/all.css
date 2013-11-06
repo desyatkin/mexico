@@ -292,6 +292,25 @@ ul#vUdobnomFormate li#yandex {
     overflow: hidden;
 }
 
+#gradus {
+    float: left;
+    font-size: 18px;
+    color: #5eb05e;
+    margin: 0 15px 0 0px;
+}
+
+.weather {
+    float: left;
+}
+
+#city {
+    font-weight: bold;
+    display: block;
+    float: right;
+    line-height: 22px;
+    margin: 0 5px 0 5px;
+}
+
 .right {
     float: right;
     margin-left: 0px !important;
