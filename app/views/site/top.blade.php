@@ -3,9 +3,7 @@
     
     <div class="shapka"></div>
     
-    <ul class="dopInfo">
-        <li class="info_o_strane"><a href="/articles/">Полезная информация о стране</a></li>
-    </ul>
+
 </div>
     
 @include('site.menu_top')
