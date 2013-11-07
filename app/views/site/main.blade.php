@@ -2,6 +2,7 @@
 <html>
 <head>
     <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name='yandex-verification' content='65d29bfe2194b660' />
     <meta name="description" content=""></meta>
     <link rel="shortcut icon" href="/favicon.ico" />

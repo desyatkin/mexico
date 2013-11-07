@@ -478,4 +478,108 @@ class SiteController extends \BaseController {
 
         return $articles;
     }
+
+    /*
+    |-------------------------------------------------------------------------------
+    | Generate article url from id
+    |-------------------------------------------------------------------------------
+    */
+    public function getArticleURL ($id) {
+
+        //get article
+        $article = Articles::find($id);
+
+        // compose url
+        $url = 'http://mexico24.ru/' . $article->category->alias;
+        if( isset($article->subcategory->alias) ) $url .= '/'. $article->subcategory->alias;
+        $url .= '/' . date('Y/m/d', strtotime($article->created_at)) . '/'. $article->alias;
+
+        return $url;
+
+    }
+
+    /*
+    |-------------------------------------------------------------------------------
+    | RSS для яндекс новостей
+    |-------------------------------------------------------------------------------
+    */
+    public function getRSS() {
+
+        header("Content-Type:   application/rss+xml");
+
+
+        // description protocol, open xml document
+        echo '<?xml version="1.0" encoding="utf-8"?>' . "\n"
+        . '<rss version="2.0" xmlns="http://backend.userland.com/rss2" xmlns:yandex="http://news.yandex.ru">' . "\n"
+        . '<channel>' . "\n"
+        . '<title>Мексика 24</title>' . "\n"
+        . '<link>http://mexico24.ru/</link>' . "\n"
+        . '<description>Актуальные новости и интересные статьи.</description>' . "\n"
+        . '<image>' . "\n"
+        . '<url>http://mexico24.ru/images/site/main/logo.gif</url>' . "\n"
+        . '<title>Мексика 24</title>' . "\n"
+        . '<link>http://mexico24.ru/</link>' . "\n"
+        . '</image>' . "\n";
+
+
+        // get 20 last articles
+        $articles = Articles::orderBy('created_at', 'desc')->limit(20)->get();
+
+        foreach($articles as $article) {
+
+            echo '<item>' . "\n";
+            echo '  <title>'. $article->article_name .'</title>' . "\n";
+            echo '  <link>'. $this->getArticleURL($article->id) .'</link> . "\n"';
+            echo '  <category>Политика и экономика</category>' . "\n";
+            echo '  <enclosure url="http://mexico24.ru/userfiles/'. $article->preview .'" type="image/jpeg"/>' . "\n";
+            echo '  <pubDate>'. date( 'r', strtotime($article->created_at) ) .'</pubDate>' . "\n";
+            echo '  <yandex:genre>message</yandex:genre>' . "\n";
+            echo '  <yandex:full-text>'. htmlspecialchars(strip_tags($article->description)) .'</yandex:full-text>' . "\n";
+            echo '</item>' . "\n";
+        }
+
+        // close xml document
+        echo '</channel>
+              </rss>';
+    }
+
+
+    /*
+    |-------------------------------------------------------------------------------
+    | function generate sitemap
+    |-------------------------------------------------------------------------------
+    */
+    public function getSitemap() {
+
+        header("Content-Type:   application/xml");
+
+        // open xml document
+        echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
+            .'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" http://www.sitemaps.org/schemas/sitemap/0.9">';
+
+        $articles = Articles::all();
+
+        foreach($articles as $article) {
+            echo '<url>' . "\n";
+
+            echo '<loc>'. $this->getArticleURL($article->id) .'</loc>' . "\n";
+            echo '<priority>0.5</priority>' . "\n";
+            echo '<lastmod>'. $article->updated_at .'</lastmod>' . "\n";
+
+            echo '</url>' . "\n";
+        }
+
+        //close xml document
+        echo '</urlset>';
+    }
+
+
+    /*
+    |-------------------------------------------------------------------------------
+    | function make redirect to other url
+    |-------------------------------------------------------------------------------
+    */
+    public function getRedirects() {
+        return Redirect::to( Input::get('url') );
+    }
 }
