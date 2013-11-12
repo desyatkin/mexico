@@ -582,4 +582,24 @@ class SiteController extends \BaseController {
     public function getRedirects() {
         return Redirect::to( Input::get('url') );
     }
+
+    /*
+    |-------------------------------------------------------------------------------
+    | Функция разового использования. 
+    | Удаляет слеш в начале ссылки на превью картинки
+    | для использования - разкоментировать и добавить соответствующий роут
+    |-------------------------------------------------------------------------------
+    */
+    public function getDeleteSlashes()
+    {
+        $articles= Articles::all();
+        foreach ($articles as $article) {
+            if(mb_substr($article->preview, 0, 1) == '/'){
+                $article->preview = mb_substr($article->preview, 1);
+                echo $article->preview . "<br> \n";
+                $article->save();
+            }
+        }
+    
+    }
 }
