@@ -186,8 +186,8 @@ class Application extends Container implements HttpKernelInterface, ResponsePrep
 		// redirect it using a 301 response code if it does which avoids duplicate
 		// content in this application while still providing a solid experience.
 		$path = $this['request']->getPathInfo();
-
-		if ($path != '/' and !ends_with($path, '/') and ! ends_with($path, '//'))
+		$dot = strpos($path, ".");
+		if ($path != '/' and !$dot and !ends_with($path, '/') and ! ends_with($path, '//'))
 		{
 			with(new SymfonyRedirect($this['request']->fullUrl(), 301))->send();
 
