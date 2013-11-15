@@ -63,7 +63,7 @@ Route::get('/logout', function () {
 });
 
 // RSS
-Route::get('/rss', 'SiteController@getRSS');
+Route::get('/rss/', 'SiteController@getRSS');
 
 // Sitemap
 Route::get('/sitemap.xml', 'SiteController@getSitemap');
