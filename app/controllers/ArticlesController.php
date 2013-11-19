@@ -9,6 +9,16 @@ class ArticlesController extends \BaseController {
 	 */
 	public function getIndex($categoryId = 999, $subcategoryId = 0)
 	{
+
+//        $articles = Articles::all();
+//
+//        foreach($articles as $article) {
+//            $article->preview = mb_substr($article->preview, 1);
+//            $article->save();
+//        }
+//
+//        exit;
+
 		// Получаем статьи с пагинацией
 		if($categoryId == 999) $articles = Articles::paginate(25);
 		else {
@@ -160,7 +170,7 @@ class ArticlesController extends \BaseController {
 	{
 		$article = Articles::find($id)->delete();
 
-		return Redirect::to('/admin/articles/');
+		return Redirect::back();
 	}
 
 	//------------------------------------------------------------------------------
@@ -181,5 +191,7 @@ class ArticlesController extends \BaseController {
 
 		return $result;
 	}
+
+
 
 }

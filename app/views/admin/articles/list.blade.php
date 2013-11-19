@@ -63,9 +63,11 @@
 		</td>
 
 		{{-- Подкатегория --}}
+        @if( isset($article->subcategory->category_name) )
 		<td>
 			{{ $article->subcategory->category_name }}
 		</td>
+        @endif
 
 		{{-- Дата создания --}}
 		<td width="150">
