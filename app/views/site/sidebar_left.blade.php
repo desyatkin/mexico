@@ -39,7 +39,7 @@
             @foreach($lastNews as $news)
                 <li>
                     <a href="{{ $news['url'] }}">{{ $news['article_name'] }}</a>
-                    <br>{{ $news['content'] }}
+                    <br>{{ strip_tags($news['content']) }}
                     <span class="date"><nobr>{{ $news['created_at'] }}</nobr></span>
                 </li>
             @endforeach

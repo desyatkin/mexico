@@ -372,6 +372,52 @@ class SiteController extends \BaseController {
     }
 
 
+    public function getShowStatic($alias) {
+        $categoryId     = 9;
+        $subcategoryId  = 0;
+       
+        // ищем статью из данной категории/подкатегории
+        $article = Articles::where('alias', '=', $alias)
+                           ->where('category_id', '=', $categoryId)
+                           ->where('subcategory_id', '=', $subcategoryId)
+                           ->orderBy('id', 'DESC')
+                           ->limit(1)
+                           ->get()
+                           ->toArray();
+
+        // если статьи нет -> 404
+        if (empty($article)) 
+            $this->error404();
+        
+        // берем 2 случайных статьи для блоков в сайдбаре
+        $saidbarArticles        = $this->blockArticles(2);
+        // берем 5 последних статьи(безотносительно категории) для блока в сайдбаре
+        $lastNews               = $this->blockArticles(5, 'id DESC');
+        // берем 5 случайных статьи из текущей катигории
+        $newsInCtaegory         = $this->articleFromCategory($categoryId, $subcategoryId, 5);
+
+
+
+
+        // собираем ссылку на категорию в которой находится статья
+        $url = '/pages/';
+        
+
+        // отправляем все переменные во view
+        $view = View::make('site.article')
+                    ->with('newsOfTheWeek'          , array_shift($saidbarArticles))
+                    ->with('interestingArticle'     , array_shift($saidbarArticles))
+                    ->with('categoryName'           , '')
+                    ->with('url'                    , $url)
+                    ->with('lastNews'               , $lastNews)
+                    ->with('article'                , $article)
+                    ->with('newsInCtaegory'         , $newsInCtaegory);
+
+        // возвращаем сформированную страницу
+        return $view;
+    }
+
+
     //------------------------------------------------------------------------------
     // Вспомогательные методы
     //------------------------------------------------------------------------------

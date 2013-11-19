@@ -27,10 +27,7 @@
     <div style="clear:both;"></div>
 
                     
-    <form id="search" action="/service/search/" method="get">
-        <input type="text" name="search" class="searchInput png" size="55" value="поиск по сайту" onclick="this.value='';" onfocus="this.value='';">
-        <input type="submit" name="addComments" value="" class="searchButton">
-    </form>
+    
 
     <div class="clear"></div>
 </div>

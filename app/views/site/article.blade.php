@@ -19,11 +19,13 @@
             </div>
 
             <div class="newsBl">
+                @if (!empty($element['preview']))
                 <div class="Img"> 
+
                     <img src="/{{ $element['preview'] }}" width="240" height="180" alt="">
                     <p class="Title">{{ $element['article_name'] }}</p>
                 </div>
-
+                @endif
                 <strong>{{ $element['description'] }}</strong>
                 {{ $element['content'] }}
                 <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
